@@ -8,6 +8,7 @@ import Words from './components/Body/Words'
 // import Test from './components/Body/Test'
 import Vocab from './components/Body/Vocab';
 import Quiz from './components/Body/Quiz';
+import Complete from './components/Body/Complete';
 
 function App() {
   // window.onbeforeunload = (event) => {
@@ -25,11 +26,9 @@ function App() {
           <Route path="/" element={<Words />} />
           <Route path="/vocab/:id" element={<Vocab />} />
           <Route path="/vocab/:id/quiz" element={<Quiz />} />
+          <Route path="/vocab/:id/complete" element={<Complete />} />
         </Routes>
       </Router>
-      {/* <Dashboard/> */}
-      {/* <AllWord/> */}
-      {/* <AddWord /> */}
     </>
   );
 }

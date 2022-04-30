@@ -2,8 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Tooltip from '@mui/material/Tooltip';
 import history from '../../helpers/history';
 import axios from 'axios';
-import NavbarComp from './../NavBarComp';
+// import NavbarComp from './../NavBarComp';
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import ReactAudioPlayer from 'react-audio-player';
 
 function Vocab() {
     const params = useParams();
@@ -36,9 +38,13 @@ function Vocab() {
             });
     }, [])
 
-    const changeExampleStatus = () => {
-        setExampleStatus(!exampleStatus)
+    const changeExampleStatus = (status) => {
+        setExampleStatus(status)
     }
+
+    useEffect(() => {
+        changeExampleStatus(false);
+    }, [current])
 
     // const [musicArray] = useState([
     //     "https://storage.dekiru.vn/Data/2017/08/31/katawakutekkyo-636397873296849216.mp3",
@@ -68,18 +74,24 @@ function Vocab() {
     //     );
     // };
     console.log(vocabs)
-
     return (
         <>
             {/* <NavbarComp /> */}
             {/* <div id="main-ct" className="p-child-dkr"> */}
             <div className="jp-kana show-word show-meaning show-soundicon">
+                {exampleStatus ? (<ReactAudioPlayer
+                    src={vocabs[current]?.exampleAudio}
+                    autoPlay
+                />) : (<ReactAudioPlayer
+                    src={vocabs[current]?.audio}
+                    autoPlay
+                />)}
                 <div className="header-les d-flex justify-content-between">
                     <div className="name-les-back">
-                        <a href="/" className="back-icon">
+                        <Link to="/" className="back-icon">
                             <i aria-hidden="true"
                                 className="fa fa-angle-left" />
-                        </a>
+                        </Link>
                         <span className="name-les">{vocabs[0]?.word.title}</span>
                     </div>
                     {/* --- */}
@@ -102,7 +114,7 @@ function Vocab() {
                         </div>
                     </div>
                 </div>
-                <div className="wp-content-les study-volc" style={{marginBottom:'50px'}}>
+                <div className="wp-content-les study-volc" style={{ marginBottom: '50px' }}>
                     <div className="container">
                         <div className="row">
                             <div className="kg-study">
@@ -115,19 +127,21 @@ function Vocab() {
                                                 <div class="vl-study vl-part-child">
                                                     <div class="ct-item">
                                                         <div class="img-volc">
-                                                            <img src={exampleStatus? vocabs[current]?.exampleImg : vocabs[current]?.img} alt="" />
+                                                            <img src={exampleStatus ? vocabs[current]?.exampleImg : vocabs[current]?.img} alt="" />
                                                         </div> <div class="info-volc">
                                                             <h3 class="text-japanese">
-                                                                <span class="ob-kanji jp-font">モルタル</span> <span class="ob-kana jp-font">モルタル</span> <span class="ob-romaji">morutaru</span>
-                                                            </h3> <h3 class="text-vietnamese">Vữa</h3>
-                                                        </div> <div class="volume-icon">
+                                                                {/* <span class="ob-kanji jp-font"></span>  */}
+                                                                <span class="ob-kana jp-font">{exampleStatus ? vocabs[current]?.example : vocabs[current]?.kana}</span>
+                                                                {/*<span class="ob-romaji">morutaru</span> */}
+                                                            </h3> <h3 class="text-vietnamese">{exampleStatus ? vocabs[current]?.exampleMeaning : vocabs[current]?.meaning}</h3>
+                                                        </div> <div class="volume-icon" onClick={() => new Audio(exampleStatus ? vocabs[current]?.exampleAudio : vocabs[current]?.audio).play()}>
                                                             <div class="img-icon">
                                                                 <img src="https://dekiru.vn/img-fix/icon-volume.png" alt="" />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div> 
-                                                <h4 class="view-exl-study" onClick={changeExampleStatus}>
+                                                </div>
+                                                <h4 class="view-exl-study" onClick={() => changeExampleStatus(!exampleStatus)}>
                                                     <span class="view-exl view-change">Xem ví dụ</span>
                                                 </h4>
                                             </div>
@@ -151,10 +165,12 @@ function Vocab() {
                                     <div className="ct-btn-result d-flex justify-content-between">
                                         <div className="left-ct">
                                             <div className="btn-group-les">
-                                                <span
-                                                    className="btn-nav-les btn-practice-les"
-                                                >Luyện tập
-                                                </span>
+                                                <Link to="quiz">
+                                                    <span
+                                                        className="btn-nav-les btn-practice-les"
+                                                    >Luyện tập
+                                                    </span>
+                                                </Link>
                                                 {/* --- */}
                                             </div>
                                             <div className="result-ntf">
@@ -179,9 +195,11 @@ function Vocab() {
                                                             className="fa fa-angle-right" />
                                                     </span>
                                                 ) : (
-                                                    <span class="btn-nav-les finish-les">Hoàn thành &nbsp;
-                                                        <i aria-hidden="true" class="fa fa-angle-double-right" />
-                                                    </span>
+                                                    <Link to="quiz">
+                                                        <span class="btn-nav-les finish-les">Hoàn thành &nbsp;
+                                                            <i aria-hidden="true" class="fa fa-angle-double-right" />
+                                                        </span>
+                                                    </Link>
                                                 )}
                                             </div>
                                         </div>

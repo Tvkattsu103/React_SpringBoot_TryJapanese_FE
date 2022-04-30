@@ -1,16 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function WordsCard({href, src, title, wordsnumber}) {
     return (
         <div className="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4">
             <div className="item-list">
                 <div className="img-thumbnail-words">
-                    <a href={href}
+                    <Link to={href}
                     ><img
                             src={src}
                             alt={title}
                             className="w-100"
-                        /></a>
+                        /></Link>
                 </div>
                 <div className="wp-ct-item bg-white">
                     <h3>

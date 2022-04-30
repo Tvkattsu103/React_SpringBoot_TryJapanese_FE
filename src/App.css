@@ -21,8 +21,8 @@
 
 /* Left tab open */
 .p-child-dkr {
-  /* padding: 60px 0;
-  padding-top: 50px */
+  padding: 60px 0;
+  padding-top: 80px
 }
 
 .open-tab-mb {
@@ -659,7 +659,7 @@ input[type="text"]:focus {
 }
 
 .jp-font {
-  font-family: Muli, HiraKakuPro-W3, "Hiragino Kaku Gothic Pro W3", "Hiragino Kaku Gothic Pro", "ãƒ’ãƒ©ã‚®ãƒŽè§’ã‚´ Pro W3", ãƒ¡ã‚¤ãƒªã‚ª, Meiryo, æ¸¸ã‚´ã‚·ãƒƒã‚¯, YuGothic, "ï¼­ï¼³ ï¼°ã‚´ã‚·ãƒƒã‚¯", "MS PGothic", "ï¼­ï¼³ ã‚´ã‚·ãƒƒã‚¯", "MS Gothic", sans-serif;
+  font-family: 'Muli', "HiraKakuPro-W3", "Hiragino Kaku Gothic Pro W3", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "游ゴシック", YuGothic, "ＭＳ Ｐゴシック", "MS PGothic", "ＭＳ ゴシック", "MS Gothic", sans-serif;
 }
 
 .jp-kana .ob-kana {
@@ -806,7 +806,8 @@ input[type="text"]:focus {
   position: absolute;  
 } */
 
-.list-vocl, .btn-group-les {
+.list-vocl,
+.btn-group-les {
   cursor: pointer;
   user-select: none;
 }
@@ -815,14 +816,26 @@ input[type="text"]:focus {
   color: #555;
   font-weight: 600;
 }
+
 .btn-nav-les {
-    min-width: 130px;
-}
-[role=button], a, area, button, input, label, select, summary, textarea {
-    touch-action: manipulation;
+  min-width: 130px;
 }
 
-.btn-restudy-les i, .btn-back-les i, .btn-submit-exam i {
+[role=button],
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea {
+  touch-action: manipulation;
+}
+
+.btn-restudy-les i,
+.btn-back-les i,
+.btn-submit-exam i {
   margin-right: 7px;
 }
 
@@ -833,25 +846,31 @@ input[type="text"]:focus {
 .type-select-img {
   margin-top: 50px;
 }
+
 .volume-suggest {
   margin-bottom: 40px;
   flex-wrap: wrap;
 }
+
 .show-soundicon .volume-icon {
   display: block;
 }
+
 .volume-icon .img-icon {
   width: 36px;
   margin: auto;
 }
+
 .volume-icon .img-icon img {
   width: 100%;
 }
+
 .volume-suggest .guide-listen {
   color: #b0b0b0;
   font-size: 15px;
   margin-left: 10px;
 }
+
 .volume-suggest .btn-open-suggest {
   display: inline-block;
   padding: 4px 22px;
@@ -863,23 +882,28 @@ input[type="text"]:focus {
 .type-select-img .item-volc {
   border: solid 3px transparent;
 }
+
 .type-select-img .item-volc {
   width: 278px;
   border-radius: 13px;
 }
+
 .header-les .score {
   font-size: 21px;
   font-weight: 600;
   color: #45434b;
-} 
+}
+
 .header-les .score span.ani-star {
   position: relative;
   right: 40px;
 }
+
 .header-les .score i {
   color: #d02445;
   margin-right: 10px;
 }
+
 .star1 {
   position: absolute;
   top: 2px;
@@ -888,20 +912,124 @@ input[type="text"]:focus {
 }
 
 .header-les .score i {
-    color: #d02445;
-    margin-right: 10px;
+  color: #d02445;
+  margin-right: 10px;
 }
+
 .star2 {
-    position: absolute;
-    top: 2px;
-    left: 0;
-    opacity: 0;
+  position: absolute;
+  top: 2px;
+  left: 0;
+  opacity: 0;
 }
+
 .star3 {
   opacity: 0;
 }
+
 .header-les .score .total-current {
   display: inline-block;
   animation-delay: .8s;
   color: #bb3146;
+}
+
+.volume-suggest .text-suggest {
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: auto;
+}
+
+.fadeInRight,
+.fadeRight-enter-active {
+  animation-name: fadeInRight;
+}
+
+.fadeInRight {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.btn-check-les {
+  background-color: #8560a8;
+}
+
+.tada {
+  animation-name: tada;
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes tada {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+
+  10%,
+  20% {
+    transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+  }
+
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+
+  40%,
+  60%,
+  80% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+.result-type i {
+  font-size: 45px !important;
+}
+.incorect i {
+  color: #d20819;
+}
+.corect i {
+  color: #7ebc4c;
+}
+.result-type span {
+  font-size: 20px;
+  margin-left: 15px;
+  color: #625f6f;
+}
+.type-select-img .item-volc.incorrect-status {
+  border: solid 3px #de0d1f;
+}
+.type-select-img .item-volc.correct-status {
+  border: solid 3px #7ebc4c;
+}
+.type-select-img .item-volc.selected-status {
+  border: solid 3px #febf20;
+}
+.btn-next-les {
+  background-color: #494559;
+}
+.btn-restudy-les {
+  background-color: #494559;
+}
+.btn-result-corect-les {
+  background-color: #7ebc4c;
 }

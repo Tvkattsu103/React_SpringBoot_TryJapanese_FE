@@ -9,6 +9,7 @@ import NavbarComp from '../../NavBarComp';
 
 function Tuvung() {
     const [words, setWords] = useState([]);
+    const [wordsTopic, setWordsTopic] = useState([]);
     const [wordsShow, setWordsShow] = useState([]);
     const [topics, setTopics] = useState([]);
     const [searchWord, setSearchWord] = useState("");
@@ -30,7 +31,34 @@ function Tuvung() {
         findAllTopics();
     }, []);
 
-    const findAllWords = useCallback((currentPage) => {
+    const findAllWordsByTopic = (topicID, currentPage) => {
+        currentPage -= 1;
+        axios
+            .get(
+                "http://localhost:8081/rest/words/topic/" +
+                topicID +
+                "?page=" +
+                currentPage +
+                "&size=" +
+                wordsPerPage
+            )
+            .then((response) =>
+                response.data
+            )
+            .then((data) => {
+                // setWords(data.content);
+                setWordsShow(data.content);
+                setTotalPages(data.totalPages);
+                setTotalElements(data.totalElements);
+                setCurrentPage(data.number + 1);
+            })
+            .catch((error) => {
+                console.log(error);
+                localStorage.removeItem("jwtToken");
+                history.push('/');
+            });
+    }
+    const findAllWords = (currentPage) => {
         currentPage -= 1;
         axios
             .get(
@@ -50,14 +78,14 @@ function Tuvung() {
                 setTotalPages(data.totalPages);
                 setTotalElements(data.totalElements);
                 setCurrentPage(data.number + 1);
+                console.log("ha")
             })
             .catch((error) => {
                 console.log(error);
                 localStorage.removeItem("jwtToken");
                 history.push('/');
             });
-    }, [])
-
+    }
     const findAllTopics = useCallback(() => {
         axios
             .get(
@@ -68,6 +96,7 @@ function Tuvung() {
             )
             .then((data) => {
                 setTopics(data);
+                console.log("ho")
             })
             .catch((error) => {
                 console.log(error);
@@ -151,7 +180,6 @@ function Tuvung() {
             )
             .then((response) => response.data)
             .then((data) => {
-                // setWords(data.content);
                 setWordsShow(data.content);
                 setTotalPages(data.totalPages);
                 setTotalElements(data.totalElements);
@@ -185,6 +213,9 @@ function Tuvung() {
         e.preventDefault();
         setCurrentTopicName(name);
         setCurrentTopicID(id);
+        if (id !== 0) {
+            findAllWordsByTopic(id, currentPage);
+        }
     }
     console.log("wordsShow", wordsShow)
     console.log("words", words)
@@ -199,17 +230,25 @@ function Tuvung() {
     }, [searchTopic])
 
     useEffect(() => {
-        setWordsShow(words.filter(word => word.topic.id === currentTopicID))
+        // if (currentTopicID === 0) {
+        //     setWordsShow(words.filter(word => word.topic.id === currentTopicID))
+        // } else {
+        //     setWordsShow(wordsTopic)
+        // }
+        // setWordsShow(words.filter(word => word.topic.id === currentTopicID));
         if (currentTopicID === 0) {
+            console.log("hi", words)
             setWordsShow(words)
+        } else {
+
         }
-        setSearchWord("")
-        firstPage()
+        setSearchWord("");
+        firstPage();
     }, [currentTopicID])
     return (
         <>
             <NavbarComp />
-            <div id="main-ct" className="p-child-dkr">
+            <div id="main-ct" className="p-child-dkr" >
                 <div className="container">
                     <div className="row">
                         {/* div left */}
@@ -274,7 +313,7 @@ function Tuvung() {
                         </div>
                         {/* div right */}
                         <div className="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
-                            <div className="wp-ct-vocl">
+                            <div className="wp-ct-vocl" >
                                 <div
                                     className="title-search d-flex justify-content-between flex-wrap"
                                 >

@@ -26,7 +26,7 @@ function NavbarComp() {
                     <div className="row">
                         <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <Navbar light expand="md">
-                            <NavbarBrand href="/">reactstrap</NavbarBrand>
+                            <NavbarBrand href="/">TryJapanese</NavbarBrand>
                             <NavbarToggler onClick={toggle} />
                             <Collapse isOpen={isOpen} navbar>
                                 <Nav className="ml-auto" navbar>
