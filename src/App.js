@@ -1,14 +1,13 @@
 import './App.css';
-import NavbarComp from './components/NavBarComp';
 import Dashboard from './components/Admin';
 import AllWord from './components/Admin/Manage/AllWord';
-import AddWord from './components/Admin/Manage/AddWord';
+import AddVocab from './components/Admin/Manage/AddVocab';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Words from './components/Body/Words'
-// import Test from './components/Body/Test'
 import Vocab from './components/Body/Vocab';
 import Quiz from './components/Body/Quiz';
 import Complete from './components/Body/Complete';
+import AllVocab from './components/Admin/Manage/AllVocab';
 
 function App() {
   // window.onbeforeunload = (event) => {
@@ -27,6 +26,11 @@ function App() {
           <Route path="/vocab/:id" element={<Vocab />} />
           <Route path="/vocab/:id/quiz" element={<Quiz />} />
           <Route path="/vocab/:id/complete" element={<Complete />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/listword" element={<AllWord />} />
+          <Route path="/admin/listword/vocabs/:id" element={<AllVocab />} />
+          <Route path="/admin/listword/vocabs/:id/add" element={<AddVocab />} />
+          {/* <Route path="/login" element={<Login />} /> */}
         </Routes>
       </Router>
     </>

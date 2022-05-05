@@ -1,14 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './Dashboard.css'
+import "font-awesome/css/font-awesome.min.css";
 import TopBar from './UI/TopBar'
 import SideBar from './UI/SideBar';
 import Footer from './UI/Footer';
+import axios from 'axios';
+import lengthSlice from '../../redux/lengthSlice';
+import {wordLengthSelector} from '../../redux/selectors';
+import { useSelector, useDispatch } from 'react-redux';
 
-function index() {
+function Dashboard() {
+    const dispatch = useDispatch();
+    const length = useSelector(wordLengthSelector);
+    const findAllWords = () => {
+        axios
+            .get(
+                "http://localhost:8081/rest/words/list"
+            )
+            .then((response) =>
+                response.data
+            )
+            .then((data) => {
+                dispatch(lengthSlice.actions.wordLength(data.length))
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+    useEffect(() => {
+        findAllWords();
+    }, [])
     return (
         <>
             <div id="wrapper">
-                <SideBar />
+                <SideBar length={length} />
                 <div id="content-wrapper" class="d-flex flex-column">
 
                     {/* Main Content */}
@@ -32,8 +57,8 @@ function index() {
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
                                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                        Number of Users</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                                                        Số lượng bài học</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{length}</div>
                                                 </div>
                                                 <div class="col-auto">
                                                     <i class="fa fa-user fa-2x text-gray-300"></i>
@@ -44,7 +69,7 @@ function index() {
                                 </div>
 
                                 {/* Earnings (Monthly) Card Example */}
-                                <div class="col-xl-3 col-md-6 mb-4">
+                                {/* <div class="col-xl-3 col-md-6 mb-4">
                                     <div class="card border-left-success shadow h-100 py-2">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
@@ -54,15 +79,15 @@ function index() {
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                                    <i class="fa fa-dollar fa-2x text-gray-300"></i>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Earnings (Monthly) Card Example */}
-                                <div class="col-xl-3 col-md-6 mb-4">
+                                {/* <div class="col-xl-3 col-md-6 mb-4">
                                     <div class="card border-left-info shadow h-100 py-2">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
@@ -77,15 +102,15 @@ function index() {
                                                     </div>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <i class="fas fa-question fa-2x text-gray-300"></i>
+                                                    <i class="fa fa-question fa-2x text-gray-300"></i>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Pending Requests Card Example */}
-                                <div class="col-xl-3 col-md-6 mb-4">
+                                {/* <div class="col-xl-3 col-md-6 mb-4">
                                     <div class="card border-left-warning shadow h-100 py-2">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
@@ -95,12 +120,12 @@ function index() {
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <i class="fas fa-blog fa-2x text-gray-300"></i>
+                                                    <i class="fa fa-odnoklassniki fa-2x text-gray-300"></i>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
 
                             {/* Content Row */}
@@ -138,11 +163,11 @@ function index() {
 
             {/* Scroll to Top Button */}
             <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
+                <i class="fa fa-angle-up"></i>
             </a>
 
         </>
     )
 }
 
-export default index
+export default Dashboard

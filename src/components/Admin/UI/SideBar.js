@@ -1,63 +1,68 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import {wordLengthSelector} from '../../../redux/selectors';
+import { useSelector } from 'react-redux';
 
 function SideBar() {
+    const length = useSelector(wordLengthSelector);
     return (
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             {/* Sidebar - Brand */}
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+            <Link to="/admin/dashboard" className="sidebar-brand d-flex align-items-center justify-content-center">
+                <div className="sidebar-brand-icon rotate-n-15">
+                    <i className="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">THTiengNhat</div>
-            </a>
+                <div className="sidebar-brand-text mx-3">THTiengNhat</div>
+            </Link>
 
             {/* Divider */}
-            <hr class="sidebar-divider my-0" />
+            <hr className="sidebar-divider my-0" />
 
             {/* Nav Item - Dashboard */}
-            <li class="nav-item ">
-                <a class="nav-link" href="dashboard">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+            <li className="nav-item ">
+                <Link className="nav-link" to="/admin/dashboard">
+                    <i className="fa fa-home fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </Link>
             </li>
 
             {/* Divider */}
-            <hr class="sidebar-divider" />
+            <hr className="sidebar-divider" />
 
             {/* Heading */}
-            <div class="sidebar-heading">
+            <div className="sidebar-heading">
                 Manage
             </div>
 
             {/* Nav Item - Tables */}
-            <li class="nav-item">
-                <a class="nav-link" href="blog">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Từ vựng (10)</span>
-                </a>
+            <li className="nav-item">
+                <Link className="nav-link" to="/admin/listword">
+                    <i className="fa fa-odnoklassniki fa-table"></i>
+                    <span>Từ vựng ({length})</span>
+                </Link>
             </li>
 
             {/* Nav Item - Tables */}
-            {/* <li class="nav-item ">
-                    <a class="nav-link" href="blog-browse">
-                        <i class="fas fa-fw fa-table"></i>
+            {/* <li className="nav-item ">
+                    <a className="nav-link" href="blog-browse">
+                        <i className="fas fa-fw fa-table"></i>
                         <span>Blog <span style="${numberBlogNotBrowse==0? '': 'color:red'}">(${numberBlogNotBrowse})</span></span></a>
                 </li>
 
-                <li class="nav-item ">
-                    <a class="nav-link" href="question-browse">
-                        <i class="fas fa-fw fa-table"></i>
+                <li className="nav-item ">
+                    <a className="nav-link" href="question-browse">
+                        <i className="fas fa-fw fa-table"></i>
                         Question <span style="${numberQuestionNotBrowse==0? '': 'color:red'}">(${numberQuestionNotBrowse})</span>
                 </li> */}
 
             {/* Divider */}
-            <hr class="sidebar-divider d-none d-md-block" />
+            <hr className="sidebar-divider d-none d-md-block" />
 
             {/* Sidebar Toggler (Sidebar) */}
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+            {/* <div className="text-center d-none d-md-inline">
+                <button className="rounded-circle border-0" id="sidebarToggle"></button>
+            </div> */}
         </ul>
     )
 }

@@ -5,6 +5,7 @@ import axios from 'axios';
 // import NavbarComp from './../NavBarComp';
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactAudioPlayer from 'react-audio-player';
 
 function Vocab() {
@@ -29,7 +30,7 @@ function Vocab() {
             )
             .then((data) => {
                 setVocabs(data);
-                setLength(data.length - 1);
+                setLength(data.length);
             })
             .catch((error) => {
                 console.log(error);
@@ -46,33 +47,6 @@ function Vocab() {
         changeExampleStatus(false);
     }, [current])
 
-    // const [musicArray] = useState([
-    //     "https://storage.dekiru.vn/Data/2017/08/31/katawakutekkyo-636397873296849216.mp3",
-    //     "https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav"
-    // ]);
-    // const [data, setData] = useState([]);
-
-    // useEffect(() => {
-    //     const musicData = musicArray.map((sound) => {
-    //         console.log(new Audio(sound));
-    //         return { audio: new Audio(sound), play: false };
-    //     });
-
-
-    //     setData(musicData);
-    // }, [musicArray]);
-
-    // const playSound = (index) => {
-    //     setData((arr) =>
-    //         arr.map((sound, i) => {
-    //             if (i === index) {
-    //                 sound.audio.play();
-    //                 // console.log(sound.audio.play());
-    //                 return { ...sound, play: true };
-    //             }
-    //         })
-    //     );
-    // };
     console.log(vocabs)
     return (
         <>
@@ -103,7 +77,7 @@ function Vocab() {
                 </div>
                 <div className="utl-volc">
                     <div className="list-vocl item-utl">
-                        <div className="el-appear d-flex align-items-center justify-content-end" data-toggle="modal" data-target="#exampleModalCenter">
+                        <div className="el-appear d-flex align-items-center justify-content-end" data-toggle="modal" data-target="#modalVocab">
                             <Tooltip title="Danh sách từ vựng" placement="left">
                                 <span className="open-utl open-list">
                                     <span>
@@ -118,31 +92,31 @@ function Vocab() {
                     <div className="container">
                         <div className="row">
                             <div className="kg-study">
-                                <div data-v-e60b73b0="" data-v-348e8e0c="" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-10 offset-xl-1">
-                                    <h3 class="guide-user-les">
-                                    </h3> <div class="text-question-les">
-                                    </div> <div class="slider-ct-lesson">
-                                        <div data-v-348e8e0c="" class="kg-study">
-                                            <div data-v-348e8e0c="" class="item-volc">
-                                                <div class="vl-study vl-part-child">
-                                                    <div class="ct-item">
-                                                        <div class="img-volc">
+                                <div data-v-e60b73b0="" data-v-348e8e0c="" className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-10 offset-xl-1">
+                                    <h3 className="guide-user-les">
+                                    </h3> <div className="text-question-les">
+                                    </div> <div className="slider-ct-lesson">
+                                        <div data-v-348e8e0c="" className="kg-study">
+                                            <div data-v-348e8e0c="" className="item-volc">
+                                                <div className="vl-study vl-part-child">
+                                                    <div className="ct-item">
+                                                        <div className="img-volc">
                                                             <img src={exampleStatus ? vocabs[current]?.exampleImg : vocabs[current]?.img} alt="" />
-                                                        </div> <div class="info-volc">
-                                                            <h3 class="text-japanese">
-                                                                {/* <span class="ob-kanji jp-font"></span>  */}
-                                                                <span class="ob-kana jp-font">{exampleStatus ? vocabs[current]?.example : vocabs[current]?.kana}</span>
-                                                                {/*<span class="ob-romaji">morutaru</span> */}
-                                                            </h3> <h3 class="text-vietnamese">{exampleStatus ? vocabs[current]?.exampleMeaning : vocabs[current]?.meaning}</h3>
-                                                        </div> <div class="volume-icon" onClick={() => new Audio(exampleStatus ? vocabs[current]?.exampleAudio : vocabs[current]?.audio).play()}>
-                                                            <div class="img-icon">
+                                                        </div> <div className="info-volc">
+                                                            <h3 className="text-japanese">
+                                                                {/* <span className="ob-kanji jp-font"></span>  */}
+                                                                <span className="ob-kana jp-font">{exampleStatus ? vocabs[current]?.example : vocabs[current]?.kana}</span>
+                                                                {/*<span className="ob-romaji">morutaru</span> */}
+                                                            </h3> <h3 className="text-vietnamese">{exampleStatus ? vocabs[current]?.exampleMeaning : vocabs[current]?.meaning}</h3>
+                                                        </div> <div className="volume-icon" onClick={() => new Audio(exampleStatus ? vocabs[current]?.exampleAudio : vocabs[current]?.audio).play()}>
+                                                            <div className="img-icon">
                                                                 <img src="https://dekiru.vn/img-fix/icon-volume.png" alt="" />
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <h4 class="view-exl-study" onClick={() => changeExampleStatus(!exampleStatus)}>
-                                                    <span class="view-exl view-change">Xem ví dụ</span>
+                                                <h4 className="view-exl-study" onClick={() => changeExampleStatus(!exampleStatus)}>
+                                                    <span className="view-exl view-change">Xem ví dụ</span>
                                                 </h4>
                                             </div>
                                         </div>
@@ -181,8 +155,8 @@ function Vocab() {
                                         <div className="right-ct">
                                             <div className="btn-group-les" >
                                                 {current !== 0 ? (
-                                                    <span class=" btn-back-les btn-nav-les" onClick={() => setCurrent(current - 1)}>
-                                                        <i aria-hidden="true" class="fa fa-angle-left" />
+                                                    <span className=" btn-back-les btn-nav-les" onClick={() => setCurrent(current - 1)}>
+                                                        <i aria-hidden="true" className="fa fa-angle-left" />
                                                         <span>Quay lại</span>
                                                     </span>
                                                 ) : null
@@ -196,8 +170,8 @@ function Vocab() {
                                                     </span>
                                                 ) : (
                                                     <Link to="quiz">
-                                                        <span class="btn-nav-les finish-les">Hoàn thành &nbsp;
-                                                            <i aria-hidden="true" class="fa fa-angle-double-right" />
+                                                        <span className="btn-nav-les finish-les">Hoàn thành &nbsp;
+                                                            <i aria-hidden="true" className="fa fa-angle-double-right" />
                                                         </span>
                                                     </Link>
                                                 )}
@@ -212,7 +186,7 @@ function Vocab() {
                 </div>
             </div>
 
-            <div className="modal" id="exampleModalCenter" role="dialog" style={{ zIndex: '5000' }}>
+            <div className="modal" id="modalVocab" role="dialog" style={{ zIndex: '5000' }}>
                 <div className="modal-dialog modal-dialog-centered" role="document">
                     <div className="modal-content">
                         <div className="modal-header">

@@ -1,7 +1,7 @@
 import React from 'react'
-import SideBar from './../UI/SideBar';
-import TopBar from './../UI/TopBar';
-import Footer from './../UI/Footer';
+import SideBar from '../UI/SideBar';
+import TopBar from '../UI/TopBar';
+import Footer from '../UI/Footer';
 
 function AddWord() {
   return (

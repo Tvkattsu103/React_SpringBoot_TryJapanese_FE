@@ -8,6 +8,9 @@ export default createSlice({
     reducers: {
         correctAnswer:(state, action) => {
             state.count = state.count + action.payload
+        },
+        resetScore:(state, action) => {
+            state.count = 0
         }
     }
 })

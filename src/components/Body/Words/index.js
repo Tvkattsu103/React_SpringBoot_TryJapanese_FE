@@ -4,12 +4,10 @@ import axios from "axios";
 import { Scrollbars } from 'react-custom-scrollbars'
 import ListItemTopicTab from './ListItemTopicTab'
 import ListWordsCard from './ListWordsCard'
-import SearchInput from './SearchInput'
 import NavbarComp from '../../NavBarComp';
 
 function Tuvung() {
     const [words, setWords] = useState([]);
-    const [wordsTopic, setWordsTopic] = useState([]);
     const [wordsShow, setWordsShow] = useState([]);
     const [topics, setTopics] = useState([]);
     const [searchWord, setSearchWord] = useState("");
