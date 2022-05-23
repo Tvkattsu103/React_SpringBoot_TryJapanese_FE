@@ -62,8 +62,8 @@ function Complete() {
     return (
         <>
             <div className="jp-kana show-word show-meaning show-soundicon pyro">
-                <div class="before"></div>
-                <div class="after"></div>
+                <div className="before"></div>
+                <div className="after"></div>
                 <div className="header-les d-flex justify-content-between">
                     <div className="name-les-back">
                         <a href="/" className="back-icon">
@@ -97,11 +97,11 @@ function Complete() {
                         <div className="row">
                             <div className="kg-study">
                                 <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-10 offset-xl-1">
-                                    <div class="ct-cpl-screen">
-                                        <div class="info-cpl text-center">
-                                            <h2 class="above-text">Hoàn thành!</h2>
-                                            <h4 class="below-text">Chúc mừng bạn đã hoàn thành xong bài học</h4>
-                                            <div class="score-bg-title">
+                                    <div className="ct-cpl-screen">
+                                        <div className="info-cpl text-center">
+                                            <h2 className="above-text">Hoàn thành!</h2>
+                                            <h4 className="below-text">Chúc mừng bạn đã hoàn thành xong bài học</h4>
+                                            <div className="score-bg-title">
                                                 <img src="https://dekiru.vn/img-fix/score-bg.png" alt="" />
                                             </div>
                                             <div style={{ marginTop: '50px' }}>
@@ -129,7 +129,7 @@ function Complete() {
                                             <div className="btn-group-les">
                                                 <span onClick={handleRestudy}
                                                     className="btn-nav-les btn-restudy-les"
-                                                ><i data-v-e60b73b0="" aria-hidden="true" class="fa fa-angle-left" />Học lại
+                                                ><i data-v-e60b73b0="" aria-hidden="true" className="fa fa-angle-left" />Học lại
                                                 </span>
                                                 {/* --- */}
                                             </div>
@@ -137,7 +137,7 @@ function Complete() {
                                         <div className="right-ct">
                                                 <div className="btn-group-les">
                                                     <span onClick={handleHomePage}
-                                                    class="btn-nav-les btn-result-corect-les">Hoàn thành
+                                                    className="btn-nav-les btn-result-corect-les">Hoàn thành
                                                     </span>
                                                 </div>
                                         </div>

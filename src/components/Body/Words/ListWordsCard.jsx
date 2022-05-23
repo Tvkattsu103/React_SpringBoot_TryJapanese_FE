@@ -12,6 +12,7 @@ function ListWordsCard({ wordsShow }) {
                 ) : (
                     wordsShow.map((word) => (
                         <WordsCard
+                            key={word.id}
                             href={`/vocab/${word.id}`}
                             src={word.photoURL}
                             title={word.title}

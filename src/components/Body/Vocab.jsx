@@ -1,15 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Tooltip from '@mui/material/Tooltip';
-import history from '../../helpers/history';
 import axios from 'axios';
-// import NavbarComp from './../NavBarComp';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactAudioPlayer from 'react-audio-player';
 
 function Vocab() {
     const params = useParams();
+    const navigate = useNavigate();
     const [vocabs, setVocabs] = useState([]);
     const [length, setLength] = useState(0);
     const [current, setCurrent] = useState(0);
@@ -34,8 +33,6 @@ function Vocab() {
             })
             .catch((error) => {
                 console.log(error);
-                localStorage.removeItem("jwtToken");
-                history.push('/');
             });
     }, [])
 
@@ -116,7 +113,7 @@ function Vocab() {
                                                     </div>
                                                 </div>
                                                 <h4 className="view-exl-study" onClick={() => changeExampleStatus(!exampleStatus)}>
-                                                    <span className="view-exl view-change">Xem ví dụ</span>
+                                                    <span className="view-exl view-change">{exampleStatus ? "Xem từ vựng" :"Xem ví dụ"}</span>
                                                 </h4>
                                             </div>
                                         </div>
@@ -190,7 +187,7 @@ function Vocab() {
                 <div className="modal-dialog modal-dialog-centered" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <h5 className="modal-title" id="exampleModalLongTitle">Danh sách từ vựng</h5>
                             <button type="button" tabIndex="-1" className="close" data-dismiss="modal" >
                                 <span aria-hidden="true">&times;</span>
                             </button>

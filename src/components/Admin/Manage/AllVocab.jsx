@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
-import SideBar from './../UI/SideBar';
-import TopBar from './../UI/TopBar';
-import Footer from './../UI/Footer';
+import SideBar from '../UI/SideBar';
+import TopBar from '../UI/TopBar';
+import Footer from '../UI/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import "font-awesome/css/font-awesome.min.css";
@@ -48,7 +48,7 @@ function AllVocab() {
 
     const updateWordQuantity = (quantity) => {
         axios
-            .put("http://localhost:8081/rest/words", {id: params.id, quantity: quantity})
+            .put("http://localhost:8081/rest/words", { id: params.id, quantity: quantity })
             .then((response) => {
                 console.log(response.data);
             })
@@ -85,7 +85,6 @@ function AllVocab() {
         const { name, value } = e.currentTarget;
         setVocabAdd({ ...vocabAdd, [name]: value })
     }
-    console.log(length)
 
     const saveVocab = (e) => {
         e.preventDefault();
@@ -107,12 +106,13 @@ function AllVocab() {
                 setShow(false)
             }
         }, 1000);
-        updateWordQuantity(length+1);
+        updateWordQuantity(length + 1);
         setVocabAdd(initialState)
         setAddState(false)
     }
 
     const updateVocab = (e) => {
+        console.log(vocabAdd);
         e.preventDefault();
         axios
             .put("http://localhost:8081/rest/vocab", vocabAdd)
@@ -124,7 +124,7 @@ function AllVocab() {
             });
         setTimeout(() => {
             if (vocabs != null) {
-                setMethod('post')
+                setMethod('put')
                 setShow(true);
                 setTimeout(() => setShow(false), 3000);
                 findVocabByID();
@@ -178,8 +178,8 @@ function AllVocab() {
                 setShow(false)
             }
         }, 1000);
-        updateWordQuantity(length-1);
-        setLength(length-1);
+        updateWordQuantity(length - 1);
+        setLength(length - 1);
     };
 
     useEffect(() => {
@@ -301,11 +301,31 @@ function AllVocab() {
                                                                 </span>
                                                                 <span
                                                                     className="btn btn-danger btn-circle btn-xs"
-                                                                    onClick={() => deleteVocab(vocab.id)}
+                                                                    data-toggle="modal" data-target={`#deleteModal${vocab.id}`}
+                                                                    // onClick={() => deleteVocab(vocab.id)}
                                                                     style={{ borderRadius: '50%', margin: '0 5px' }}>
                                                                     <i className="fa fa-trash" />
                                                                 </span>
                                                             </td>
+                                                            <div className="modal" id={`deleteModal${vocab.id}`} role="dialog" style={{ zIndex: '5000' }}>
+                                                                <div className="modal-dialog modal-dialog-centered" role="document">
+                                                                    <div className="modal-content">
+                                                                        <div className="modal-header">
+                                                                            <h5 className="modal-title" id="exampleModalLongTitle">Danh sách từ vựng</h5>
+                                                                            <button type="button" tabIndex="-1" className="close" data-dismiss="modal" >
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <p>Xác nhận xoá <b>{vocab.kanji}</b>?</p>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-danger" onClick={() => deleteVocab(vocab.id)} data-dismiss="modal">Xoá</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </tr>
                                                     ))
                                                 }

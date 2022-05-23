@@ -10,9 +10,8 @@ function WordsCard({href, src, title, wordsnumber}) {
                     ><img
                             src={src}
                             alt={title}
-                            width="255"
                             height="170"
-                            // className="w-100"
+                            className="w-100"
                         /></Link>
                 </div>
                 <div className="wp-ct-item bg-white">

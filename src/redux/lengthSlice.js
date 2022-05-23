@@ -3,11 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 export default createSlice({
     name: 'length',
     initialState: {
-        count: 0
+        word: 0,
+        topic: 0,
+        user: 0
     },
     reducers: {
         wordLength:(state, action) => {
-            state.count = action.payload
+            state.word = action.payload
+        },
+        topicLength:(state, action) => {
+            state.topic = action.payload
+        },
+        userLength:(state, action) => {
+            state.user = action.payload
         }
     }
 })

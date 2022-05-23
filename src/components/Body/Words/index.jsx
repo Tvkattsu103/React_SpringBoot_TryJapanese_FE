@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import history from '../../../helpers/history';
 import axios from "axios";
 import { Scrollbars } from 'react-custom-scrollbars'
 import ListItemTopicTab from './ListItemTopicTab'
 import ListWordsCard from './ListWordsCard'
 import NavbarComp from '../../NavBarComp';
+import { useNavigate } from 'react-router-dom';
+import authToken from "../../../utils/authToken";
+import FooterComp from '../../FooterComp';
 
 function Tuvung() {
     const [words, setWords] = useState([]);
@@ -24,6 +26,14 @@ function Tuvung() {
     const [currentTopicID, setCurrentTopicID] = useState(0);
     const [currentTopicName, setCurrentTopicName] = useState("all");
 
+
+    const navigate = useNavigate();
+    // if (localStorage.jwtToken) {
+    //     authToken(localStorage.jwtToken);
+    // } else {
+    //     navigate("login")
+    // }
+
     useEffect(() => {
         findAllWords(currentPage);
         findAllTopics();
@@ -41,20 +51,20 @@ function Tuvung() {
                 wordsPerPage
             )
             .then((response) =>
-                response.data
+                console.log("abv",response)
             )
-            .then((data) => {
-                // setWords(data.content);
-                setWordsShow(data.content);
-                setTotalPages(data.totalPages);
-                setTotalElements(data.totalElements);
-                setCurrentPage(data.number + 1);
-            })
-            .catch((error) => {
-                console.log(error);
-                localStorage.removeItem("jwtToken");
-                history.push('/');
-            });
+            // .then((data) => {
+            //     // setWords(data.content);
+            //     setWordsShow(data.content);
+            //     setTotalPages(data.totalPages);
+            //     setTotalElements(data.totalElements);
+            //     setCurrentPage(data.number + 1);
+            // })
+            // .catch((error) => {
+            //     console.log(error);
+            //     localStorage.removeItem("jwtToken");
+            //     navigate("/login");
+            // });
     }
     const findAllWords = (currentPage) => {
         currentPage -= 1;
@@ -76,12 +86,11 @@ function Tuvung() {
                 setTotalPages(data.totalPages);
                 setTotalElements(data.totalElements);
                 setCurrentPage(data.number + 1);
-                console.log("ha")
             })
             .catch((error) => {
                 console.log(error);
                 localStorage.removeItem("jwtToken");
-                history.push('/');
+                navigate("/login");
             });
     }
     const findAllTopics = useCallback(() => {
@@ -94,12 +103,11 @@ function Tuvung() {
             )
             .then((data) => {
                 setTopics(data);
-                console.log("ho")
             })
             .catch((error) => {
                 console.log(error);
                 localStorage.removeItem("jwtToken");
-                history.push('/');
+                navigate("/login");
             });
     }, [])
 
@@ -215,8 +223,7 @@ function Tuvung() {
             findAllWordsByTopic(id, currentPage);
         }
     }
-    console.log("wordsShow", wordsShow)
-    console.log("words", words)
+
     useEffect(() => {
         if (searchWord === "") {
             findAllWords(currentPage);
@@ -307,7 +314,6 @@ function Tuvung() {
 
                                 </div>
                             </div>
-                            {/* <PostUseful/> */}
                         </div>
                         {/* div right */}
                         <div className="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
@@ -325,7 +331,7 @@ function Tuvung() {
 
 
                                     <div
-                                        className="search-vocl d-flex justify-content-between align-items-center"
+                                        className="search-vocl d-flex justify-content-between align-items-center bg-white"
                                     >
                                         <input
                                             type="text"
@@ -375,7 +381,7 @@ function Tuvung() {
                                                     value={currentPage}
                                                     onChange={changePage}
                                                 />
-                                                <div class="input-group-append">
+                                                <div className="input-group-append">
                                                     <button
                                                         type="button"
                                                         className="btn btn-outline-info"
@@ -402,6 +408,7 @@ function Tuvung() {
                     </div>
                 </div>
             </div>
+            <FooterComp/>
         </>
     )
 }

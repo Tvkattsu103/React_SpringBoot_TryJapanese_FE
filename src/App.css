@@ -7,20 +7,20 @@
   transition: .3s;
   padding: 8px 0;
   box-shadow: 0 0 10px #5d5d5d24;
-  background-color: #fff;
+  background-color: rgb(109, 155, 255);
   position: fixed;
   width: 100%;
   left: 0;
   top: 0;
   z-index: 100;
 }
-
 .navbar {
   padding: 0 !important;
 }
 
 /* Left tab open */
 .p-child-dkr {
+  min-height: 100vh;
   padding: 60px 0;
   padding-top: 80px
 }
@@ -43,6 +43,9 @@
 }
 
 @media (min-width: 767px) and (max-width: 1440px) {
+  .wp-ct-vocl {
+    margin-top: 30px;
+  }
   .wp-btn-progress-les div.btn-result {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -231,7 +234,7 @@ li {
 .tab-vocl-sl .item-topic-tab.active,
 .tab-vocl-sl .item-topic-tab:hover {
   color: #fff;
-  background-color: #febf20;
+  background-color: #6aafff;
   text-decoration: none;
 }
 
@@ -1032,4 +1035,21 @@ textarea {
 }
 .btn-result-corect-les {
   background-color: #7ebc4c;
+}
+.svg-inline--fa {
+  overflow: visible;
+  display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    vertical-align: -0.125em;
+}
+.fa-sign-in-alt.fa-w-16 {
+  width: 1em;
+}
+.fade {
+  opacity: 1!important;
+}
+
+a{
+  color: #383444 !important;
 }

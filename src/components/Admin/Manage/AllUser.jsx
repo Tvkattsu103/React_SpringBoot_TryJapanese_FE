@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import SideBar from './../UI/SideBar';
-import TopBar from './../UI/TopBar';
-import Footer from './../UI/Footer';
+import SideBar from '../UI/SideBar';
+import TopBar from '../UI/TopBar';
+import Footer from '../UI/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import "font-awesome/css/font-awesome.min.css";
 import MyToast from "../MyToast";
 import { useNavigate } from "react-router-dom";
 
-function AllWord() {
+function AllUser() {
   const navigate = useNavigate();
   const [words, setWords] = useState([]);
   const [searchWord, setSearchWord] = useState("");
@@ -25,7 +25,7 @@ function AllWord() {
     currentPage -= 1;
     axios
       .get(
-        "http://localhost:8081/rest/words?pageNumber=" +
+        "http://localhost:8081/rest/user?pageNumber=" +
         currentPage +
         "&pageSize=" +
         wordsPerPage +
@@ -49,7 +49,7 @@ function AllWord() {
 
   const deleteWord = (id) => {
     axios
-      .delete("http://localhost:8081/rest/words/" + id)
+      .delete("http://localhost:8081/rest/user/" + id)
       .then((response) => {
         console.log(response.data);
       })
@@ -132,7 +132,7 @@ function AllWord() {
     currentPage -= 1;
     axios
       .get(
-        "http://localhost:8081/rest/words/search/" +
+        "http://localhost:8081/rest/user/search/" +
         searchWord +
         "?page=" +
         currentPage +
@@ -184,7 +184,7 @@ function AllWord() {
               {/* DataTales Example */}
               <div className="card shadow mb-4">
                 <div className="card-header py-3">
-                  <h6 className="m-0 font-weight-bold text-primary">Quản lý danh sách từ vựng</h6>
+                  <h6 className="m-0 font-weight-bold text-primary">Quản lý danh tài khoản</h6>
                 </div>
                 <div
                   className="title-search" style={{ width: '300px', paddingTop: '20px', paddingLeft: '20px' }}
@@ -197,7 +197,7 @@ function AllWord() {
                       id="search-title-vocl"
                       name="search-title-vocl"
                       value={searchWord}
-                      placeholder="Tìm kiếm bộ từ..."
+                      placeholder="Tìm kiếm..."
                       className="input-search"
                       onChange={searchChange}
                       onKeyDown={handleKeyDown}
@@ -213,50 +213,62 @@ function AllWord() {
                       <thead>
                         <tr>
                           <th>ID</th>
-                          <th>Tên bài</th>
-                          <th>Số lượng</th>
-                          <th>Chủ đề</th>
+                          <th>Họ Tên</th>
+                          <th>Email</th>
+                          <th>Số điện thoại</th>
+                          <th>Quyền</th>
                           <th>Thao tác</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
                           <th>ID</th>
-                          <th>Tên bài</th>
-                          <th>Số lượng</th>
-                          <th>Chủ đề</th>
+                          <th>Họ Tên</th>
+                          <th>Email</th>
+                          <th>Số điện thoại</th>
+                          <th>Quyền</th>
                           <th>Thao tác</th>
                         </tr>
                       </tfoot>
                       <tbody>
                         {
-                          words.map((word) => (
+                          words.map((user) => (<>
                             <tr>
-                              <td>{word.id}</td>
-                              <td>{word.title}</td>
-                              <td>{word.quantity}</td>
-                              <td>{word.topic.name}</td>
-                              <td width={'180px'}>
-                                <span
-                                  className="btn btn-success btn-circle btn-xs"
-                                  onClick={() => deleteWord(word.id)}
-                                  style={{ borderRadius: '50%', margin: '0 5px' }}>
-                                  <i className="fa fa-edit" />
-                                </span>
+                              <td>{user.id}</td>
+                              <td>{user.name}</td>
+                              <td>{user.email}</td>
+                              <td>{user.mobile}</td>
+                              <td>{user.role.name}</td>
+                              <td width={'100px'}>
                                 <span
                                   className="btn btn-danger btn-circle btn-xs"
-                                  onClick={() => deleteWord(word.id)}
+                                  // onClick={() => deleteWord(word.id)}
+                                  data-toggle="modal" data-target={`#deleteModal${user.id}`}
                                   style={{ borderRadius: '50%', margin: '0 5px' }}>
                                   <i className="fa fa-trash" />
                                 </span>
-                                <span
-                                  className="btn btn-primary btn-circle btn-xs"
-                                  onClick={() => navigate('vocabs/'+word.id)}
-                                  style={{ borderRadius: '50%', margin: '0 5px' }}>
-                                  <i className="fa fa-eye" />
-                                </span>
                               </td>
                             </tr>
+                            <div className="modal" id={`deleteModal${user.id}`} role="dialog" style={{ zIndex: '5000' }}>
+                              <div className="modal-dialog modal-dialog-centered" role="document">
+                                <div className="modal-content">
+                                  <div className="modal-header">
+                                    <h5 className="modal-title" id="exampleModalLongTitle">Danh sách từ vựng</h5>
+                                    <button type="button" tabIndex="-1" className="close" data-dismiss="modal" >
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p>Xác nhận xoá <b>{user.name}</b>?</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" onClick={() => deleteWord(user.id)} data-dismiss="modal">Xoá</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </>
                           ))
                         }
                       </tbody>
@@ -337,4 +349,4 @@ function AllWord() {
   )
 }
 
-export default AllWord
+export default AllUser

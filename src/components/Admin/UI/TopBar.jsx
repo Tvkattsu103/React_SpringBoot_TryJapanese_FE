@@ -1,7 +1,26 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+import authToken from "../../../utils/authToken";
+import authSlice from '../../../redux/authSlice';
 
 function TopBar() {
+    const navigate = useNavigate();
+    if (localStorage.jwtToken) {
+        authToken(localStorage.jwtToken);
+    }
+
+    const dispatch = useDispatch();
+
+    const logout = () => {
+        localStorage.removeItem("jwtToken");
+        dispatch(authSlice.actions.success({ username: "", isLoggedIn: false }));
+        navigate("/login")
+    };
+
+    const auth = useSelector((state) => state.auth.user);
     return (
+        
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
             {/* Sidebar Toggle (Topbar) */}
@@ -43,9 +62,9 @@ function TopBar() {
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Chào Admin</span>
                         <img class="img-profile rounded-circle"
-                            src="${pageContext.request.contextPath}/resources/images/undraw_profile.svg" />
+                            src="https://i.pinimg.com/736x/cc/16/0c/cc160c19dbd165c43046c176223f10fe.jpg" />
                     </a>
                     {/* Dropdown - User Information */}
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -55,10 +74,10 @@ function TopBar() {
                             Profile
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <span class="dropdown-item" onClick={logout} style={{cursor:"pointer"}} data-toggle="modal" data-target="#logoutModal">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Logout
-                        </a>
+                        </span>
                     </div>
                 </li>
 

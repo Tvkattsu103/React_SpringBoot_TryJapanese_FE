@@ -305,7 +305,7 @@ function Quiz() {
                 <div className="modal-dialog modal-dialog-centered" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <h5 className="modal-title" id="exampleModalLongTitle">Danh sách từ vựng</h5>
                             <button type="button" tabIndex="-1" className="close" data-dismiss="modal" >
                                 <span aria-hidden="true">&times;</span>
                             </button>
